@@ -6,6 +6,8 @@ class Kostache extends Mustache
 	{
 		parent::__construct($template, $view, $partials);
 
+		$this->_charset = Kohana::$charset;
+
 		// Override the template location to match kohana's conventions
 		if ( ! $this->_template)
 		{
