@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>{{title}}</title>
+	</head>
+	<body>
+		<h1>{{title}}</h1>
+		<p>Here are all my {{things}}:</p>
+		<ul>
+			{{#tests}}
+			<li class="{{class}}"><strong>{{object.id}} (class {{class}}):</strong> ({{object.name}}:{{object.value}})</li>
+			{{/tests}} 
+		</ul>
+	</body>
+</html>
