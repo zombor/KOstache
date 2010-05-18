@@ -5,7 +5,7 @@ KOstache is a kohana module for using [Mustache](http://defunkt.github.com/musta
 
 Mustache is a logic-less template class. It is impossible to embed logic into mustache files.
 
-Usage
+Usage & Simple Example
 -----
 
 View classes go in classes/view/
@@ -34,7 +34,73 @@ And you get:
 
 	"This is a bar"
 
-For specific usage and documentation, see 
+Complex Example
+-----
+
+Model (This example uses [AutoModeler](http://github.com/zombor/Auto-Modeler)):
+
+	<?php
+
+	class Model_Test extends AutoModeler
+	{
+		protected $_table_name = 'tests';
+
+		protected $_data = array(
+			'id' => '',
+			'name' => '',
+			'value' => '',
+		);
+
+		protected $_rules = array(
+			'name' => array('not_empty'),
+			'value' => array('not_empty'),
+		);
+	}
+
+View:
+
+	<?php
+
+	class View_Example extends Kostache
+	{
+		public $title = 'Testing';
+
+		public function things()
+		{
+			return Inflector::plural(get_class(new Model_Test));
+		}
+
+		public function tests()
+		{
+			$tests = array();
+			foreach (AutoModeler::factory('test')->fetch_all() as $test)
+			{
+				$tests[] = $test->as_array();
+			}
+			return $tests;
+		}
+	}
+
+Template:
+
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8" />
+			<title>{{title}}</title>
+		</head>
+		<body>
+			<h1>{{title}}</h1>
+			<p>Here are all my {{things}}:</p>
+			<ul>
+				{{#tests}}
+				<li><strong>{{id}}:</strong> ({{name}}:{{value}})</li>
+				{{/tests}}
+			</ul>
+		</body>
+	</html>
+
+For specific usage and documentation, see:
 
 [PHP Mustache](http://github.com/bobthecow/mustache.php)
 
