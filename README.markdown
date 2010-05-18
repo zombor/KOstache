@@ -100,6 +100,19 @@ Template:
 		</body>
 	</html>
 
+Controller:
+
+	<?php
+
+	class Controller_Welcome extends Controller {
+
+		public function action_index()
+		{
+			echo new View_Example;
+		}
+
+	} // End Welcome
+
 For specific usage and documentation, see:
 
 [PHP Mustache](http://github.com/bobthecow/mustache.php)
