@@ -7,10 +7,12 @@
 	<body>
 		<h1>{{title}}</h1>
 		<p>Here are all my {{things}}:</p>
+		{{#tests?}}
 		<ul>
 			{{#tests}}
 			<li class="{{class}}"><strong>{{object.id}} (class {{class}}):</strong> ({{object.name}}:{{object.value}})</li>
 			{{/tests}} 
 		</ul>
+		{{/tests?}}
 	</body>
 </html>
