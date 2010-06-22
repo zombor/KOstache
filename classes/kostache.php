@@ -2,6 +2,12 @@
 
 class Kostache extends Mustache
 {
+	public static function factory($path, $template = null, $view = null, $partials = null)
+	{
+		$class = 'View_'.str_replace('/', '_', $path);
+		return new $class($template, $view, $partials);
+	}
+
 	public function __construct($template = null, $view = null, $partials = null)
 	{
 		parent::__construct($template, $view, $partials);
