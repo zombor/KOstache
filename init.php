@@ -1,3 +1,3 @@
 <?php
 
-include Kohana::find_file('vendor', 'Mustache');
+include Kohana::find_file('vendor', 'mustache/Mustache');
