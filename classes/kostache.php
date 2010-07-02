@@ -2,12 +2,37 @@
 
 class Kostache extends Mustache
 {
+	/**
+	 * KOstache class factory constructor.
+	 *
+	 * This method accepts a $template string and a $view object. Optionally, pass an associative
+	 * array of partials as well.
+	 *
+	 * @access public
+	 * @param string $path the path of the class to load
+	 * @param string $template (default: null)
+	 * @param mixed $view (default: null)
+	 * @param array $partials (default: null)
+	 * @return void
+	 */
 	public static function factory($path, $template = null, $view = null, $partials = null)
 	{
 		$class = 'View_'.str_replace('/', '_', $path);
 		return new $class($template, $view, $partials);
 	}
 
+	/**
+	 * KOstache class constructor.
+	 *
+	 * This method accepts a $template string and a $view object. Optionally, pass an associative
+	 * array of partials as well.
+	 *
+	 * @access public
+	 * @param string $template (default: null)
+	 * @param mixed $view (default: null)
+	 * @param array $partials (default: null)
+	 * @return void
+	 */
 	public function __construct($template = null, $view = null, $partials = null)
 	{
 		parent::__construct($template, $view, $partials);
@@ -32,6 +57,15 @@ class Kostache extends Mustache
 			$this->_template = file_get_contents($template);
 		else
 			throw new Kohana_Exception('Template file not found: templates/'.$view_location);
+
+		// Convert partials to expanded template strings
+		foreach ($this->_partials as $key => $partial_template)
+		{
+			if ($location = Kohana::find_file('templates', $partial_template, 'mustache'))
+			{
+				$this->_partials[$key] = file_get_contents($location);
+			}
+		}
 	}
 
 	/**
