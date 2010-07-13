@@ -119,4 +119,22 @@ class Kostache extends Mustache
 
 		return $this;
 	}
+
+	/**
+	 * Overriding __toString to use Kohana's exception handler
+	 * 
+	 * @return string
+	 */
+	public function __toString()
+	{
+		try
+		{
+			$result = $this->render();
+			return $result;
+		}
+		catch (Exception $e) {
+			Kohana::exception_handler($e);
+			return '';
+		}
+	}
 }
