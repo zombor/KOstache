@@ -1,14 +1,14 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-abstract class Controller_Kostache extends Controller {
+abstract class Controller_Layout extends Controller {
 
 	/**
-	 * @var  string  page template
+	 * @var  string  page layout
 	 */
-	public $template = 'template';
+	public $template = 'layout';
 
 	/**
-	 * @var  boolean  auto render template
+	 * @var  boolean  auto render layout
 	 **/
 	public $auto_render = TRUE;
 
@@ -19,15 +19,16 @@ abstract class Controller_Kostache extends Controller {
 	{
 		if ($this->auto_render === TRUE)
 		{
-			// Load the template
-			$this->template = Walrus::factory($this->template);
+			// Load the layout
+			$view_class = 'View_'.$this->template;
+			$this->template = new $view_class;
 		}
 
 		return parent::before();
 	}
 
 	/**
-	 * Assigns the template [View] as the request response.
+	 * Assigns the layout [View] as the request response.
 	 */
 	public function after()
 	{
@@ -39,4 +40,4 @@ abstract class Controller_Kostache extends Controller {
 		return parent::after();
 	}
 
-} // End Controller_Kostache
+} // End Controller_Layout
