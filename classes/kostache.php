@@ -18,6 +18,10 @@ class Kostache extends Mustache
 	public static function factory($path, $template = null, $view = null, $partials = null)
 	{
 		$class = 'View_'.str_replace('/', '_', $path);
+
+		if ( ! class_exists($class))
+			throw new Kohana_View_Exception('Missing Kostache View Class for ":class"', array(':class' => $class));
+
 		return new $class($template, $view, $partials);
 	}
 
