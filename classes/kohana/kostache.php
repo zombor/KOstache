@@ -123,4 +123,25 @@ class Kohana_Kostache extends Mustache
 
 		return $this;
 	}
+
+	/**
+	 * Magic method, returns the output of [View::render].
+	 *
+	 * @return  string
+	 * @uses    View::render
+	 */
+	public function __toString()
+	{
+		try
+		{
+			return $this->render();
+		}
+		catch (Exception $e)
+		{
+			// Display the exception message
+			Kohana::exception_handler($e);
+
+			return '';
+		}
+	}
 }
