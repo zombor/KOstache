@@ -61,15 +61,6 @@ class Kohana_Kostache extends Mustache
 			$this->_template = file_get_contents($template);
 		else
 			throw new Kohana_Exception('Template file not found: templates/'.$view_location);
-
-		// Convert partials to expanded template strings
-		foreach ($this->_partials as $key => $partial_template)
-		{
-			if ($location = Kohana::find_file('templates', $partial_template, 'mustache'))
-			{
-				$this->_partials[$key] = file_get_contents($location);
-			}
-		}
 	}
 
 	/**
@@ -143,5 +134,19 @@ class Kohana_Kostache extends Mustache
 
 			return '';
 		}
+	}
+
+	public function render($template = null, $view = null, $partials = null)
+	{
+		// Convert partials to expanded template strings
+		foreach ($this->_partials as $key => $partial_template)
+		{
+			if ($location = Kohana::find_file('templates', $partial_template, 'mustache'))
+			{
+				$this->_partials[$key] = file_get_contents($location);
+			}
+		}
+
+		return parent::render($template, $view, $partials);
 	}
 }
