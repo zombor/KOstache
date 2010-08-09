@@ -14,6 +14,14 @@ class View_Kohana_Layout extends Kostache
 	 */
 	public function render($template = null, $view = null, $partials = null)
 	{
+		// Override the template location to match kohana's conventions
+		if ( ! $this->_template)
+		{
+			$foo = explode('_', get_class($this));
+			array_shift($foo);
+			$this->_template = strtolower(implode('/', $foo));
+		}
+		
 		$this->_partials+=array(
 			'body' => $this->_template
 		);
