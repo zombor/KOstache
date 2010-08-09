@@ -15,8 +15,11 @@ class View_Kohana_Layout extends Kostache
 	public function render($template = null, $view = null, $partials = null)
 	{
 		$this->_partials+=array(
-			'body' => $view_location
+			'body' => $this->_template
 		);
+
+		// Make the layout view the child class's template
+		$this->_template = file_get_contents(Kohana::find_file('templates', $this->_layout, 'mustache'));
 
 		return parent::render($template, $view, $partials);
 	}
