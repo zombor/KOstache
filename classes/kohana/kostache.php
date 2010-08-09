@@ -131,12 +131,12 @@ class Kohana_Kostache extends Mustache
 			$view_location = $this->_template;
 		}
 
-		$view_location = Kohana::find_file('templates', $view_location, 'mustache');
+		$this->_template = Kohana::find_file('templates', $view_location, 'mustache');
 
-		if ($view_location)
-			$this->_template = file_get_contents($view_location);
-		else
+		if ( ! $this->_template AND ! $template)
 			throw new Kohana_Exception('Template file not found: templates/'.$view_location);
+
+		$this->_template = file_get_contents($this->_template);
 
 		// Convert partials to expanded template strings
 		foreach ($this->_partials as $key => $partial_template)
