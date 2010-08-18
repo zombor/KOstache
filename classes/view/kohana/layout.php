@@ -19,7 +19,7 @@ class View_Kohana_Layout extends Kostache
 		{
 			$foo = explode('_', get_class($this));
 			array_shift($foo);
-			$this->_template = strtolower(implode(DIRECTORY_SEPERATOR, $foo));
+			$this->_template = strtolower(implode(DIRECTORY_SEPARATOR, $foo));
 		}
 
 		$this->_partials+=array(
