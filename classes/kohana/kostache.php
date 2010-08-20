@@ -2,6 +2,8 @@
 
 class Kohana_Kostache extends Mustache
 {
+	protected $_partials_processed = FALSE;
+
 	/**
 	 * KOstache class factory constructor.
 	 *
@@ -119,32 +121,40 @@ class Kohana_Kostache extends Mustache
 
 	public function render($template = null, $view = null, $partials = null)
 	{
-		// Override the template location to match kohana's conventions
-		if ( ! $this->_template)
+		if (NULL === $template)
 		{
-			$foo = explode('_', get_class($this));
-			array_shift($foo);
-			$view_location = strtolower(implode('/', $foo));
+			// Override the template location to match kohana's conventions
+			if ( ! $this->_template)
+			{
+				$foo = explode('_', get_class($this));
+				array_shift($foo);
+				$view_location = strtolower(implode('/', $foo));
+			}
+			else
+			{
+				$view_location = $this->_template;
+			}
+
+			$this->_template = Kohana::find_file('templates', $view_location, 'mustache');
+
+			if ( ! $this->_template AND ! $template)
+				throw new Kohana_Exception('Template file not found: templates/'.$view_location);
+
+			$this->_template = file_get_contents($this->_template);
 		}
-		else
-		{
-			$view_location = $this->_template;
-		}
-
-		$this->_template = Kohana::find_file('templates', $view_location, 'mustache');
-
-		if ( ! $this->_template AND ! $template)
-			throw new Kohana_Exception('Template file not found: templates/'.$view_location);
-
-		$this->_template = file_get_contents($this->_template);
 
 		// Convert partials to expanded template strings
-		foreach ($this->_partials as $key => $partial_template)
+		if ( ! $this->_partials_processed)
 		{
-			if ($location = Kohana::find_file('templates', $partial_template, 'mustache'))
+			foreach ($this->_partials as $key => $partial_template)
 			{
-				$this->_partials[$key] = file_get_contents($location);
+				if ($location = Kohana::find_file('templates', $partial_template, 'mustache'))
+				{
+					$this->_partials[$key] = file_get_contents($location);
+				}
 			}
+
+			$this->_partials_processed = TRUE;
 		}
 
 		return parent::render($template, $view, $partials);
