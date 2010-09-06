@@ -205,6 +205,14 @@ KOstache comes with a View_Layout class instead of a template controller. This a
 
 To use it, have your view extend the View_Layout class. You can then specify your own layout file by placing it in templates/layout.mustache. At a minimum, it needs to have a {{>body}} partial defined in it.
 
+If you have a view that extends the View_Layout class, but wish to render only the template and not the entire layout, you can set the public $render_layout property to FALSE.  This is useful if you want to use the same view class for external requests and HMVC requests.
+
+    $view = new View_Post_List;
+    if ($this->request !== Request::instance) // Is internal request
+    {
+        $view->render_layout = FALSE;
+    }
+
 For specific usage and documentation, see:
 
 [PHP Mustache](http://github.com/bobthecow/mustache.php)
