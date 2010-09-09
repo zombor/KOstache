@@ -10,26 +10,19 @@ class View_Kohana_Layout extends Kostache
 	public $title = 'Brought to you by KOstache!';
 
 	/**
-	 * Renders the body template into the layout
+	 * Put contents into this layout
 	 */
-	public function render($template = null, $view = null, $partials = null)
+	public function after($rendered_string)
 	{
-		// Override the template location to match kohana's conventions
-		if ( ! $this->_template)
-		{
-			$foo = explode('_', get_class($this));
-			array_shift($foo);
-			$this->_template = strtolower(implode(DIRECTORY_SEPARATOR, $foo));
-		}
+		if ($this->_layout === NULL)
+			return $rendered_string;
 
-		$this->_partials+=array(
-			'body' => $this->_template
-		);
+		// Add body as a property
+		$this->body = $rendered_string;
 
-		// Make the layout view the child class's template
-		$this->_template = $this->_layout;
+		// Put this class into a layout view
+		$layout = new Kostache($this->_layout, $this);
 
-		return parent::render($template, $view, $partials);
+		return $layout->render();
 	}
-
 } // End View_Layout
