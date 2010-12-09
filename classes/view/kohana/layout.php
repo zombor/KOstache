@@ -4,6 +4,8 @@ class View_Kohana_Layout extends Kostache
 {
 	protected $_layout = 'layout';
 
+	public $render_layout = TRUE;
+
 	/**
 	 * @var string template title
 	 */
@@ -22,12 +24,15 @@ class View_Kohana_Layout extends Kostache
 			$this->_template = strtolower(implode(DIRECTORY_SEPARATOR, $foo));
 		}
 
-		$this->_partials+=array(
-			'body' => $this->_template
-		);
+		if ($this->render_layout)
+		{
+			$this->_partials+=array(
+				'body' => $this->_template
+			);
 
-		// Make the layout view the child class's template
-		$this->_template = $this->_layout;
+			// Make the layout view the child class's template
+			$this->_template = $this->_layout;
+		}
 
 		return parent::render($template, $view, $partials);
 	}
