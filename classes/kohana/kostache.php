@@ -2,6 +2,8 @@
 
 class Kohana_Kostache extends Mustache
 {
+	const VERSION = 1.3;
+
 	protected $_partials_processed = FALSE;
 
 	/**
