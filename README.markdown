@@ -48,7 +48,7 @@ Did you know the pagination view in Kohana is terrible? We are going to fix it:
 
 	</p><!-- .pagination -->
 
-Wow, look at all that login in there! How do you plan on effectively maintaining that?!?
+Wow, look at all that logic in there! How do you plan on effectively maintaining that?!?
 
 ### Our new View Class (classes/view/pagination/basic.php)
 
