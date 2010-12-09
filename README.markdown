@@ -1,193 +1,120 @@
-KOstache
-============
+# KOstache
 
-KOstache is a kohana module for using [Mustache](http://defunkt.github.com/mustache/) templates in your application.
+KOstache is a [Kohana 3](https://github.com/kohana/kohana) module for using [Mustache](http://defunkt.github.com/mustache/) templates in your application.
 
 Mustache is a logic-less template class. It is impossible to embed logic into mustache files.
 
-Usage & Simple Example
------
+## Example
 
-View classes go in classes/view/
+Did you know the pagination view in Kohana is terrible? We are going to fix it:
 
-classes/view/example.php
+### How it exists now:
 
-	<?php
+	<p class="pagination">
 
-	class View_Example extends Kostache
-	{
-		public $foo = 'bar';
-	}
+		<?php if ($first_page !== FALSE): ?>
+			<a href="<?php echo $page->url($first_page) ?>" rel="first"><?php echo __('First') ?></a>
+		<?php else: ?>
+			<?php echo __('First') ?>
+		<?php endif ?>
 
-Template files go in templates/
+		<?php if ($previous_page !== FALSE): ?>
+			<a href="<?php echo $page->url($previous_page) ?>" rel="prev"><?php echo __('Previous') ?></a>
+		<?php else: ?>
+			<?php echo __('Previous') ?>
+		<?php endif ?>
 
-templates/example.mustache
+		<?php for ($i = 1; $i <= $total_pages; $i++): ?>
 
-	This is a {{foo}}
+			<?php if ($i == $current_page): ?>
+				<strong><?php echo $i ?></strong>
+			<?php else: ?>
+				<a href="<?php echo $page->url($i) ?>"><?php echo $i ?></a>
+			<?php endif ?>
 
-In your controller, just do:
+		<?php endfor ?>
 
-	$view = new View_Example;
-	echo $view;
+		<?php if ($next_page !== FALSE): ?>
+			<a href="<?php echo $page->url($next_page) ?>" rel="next"><?php echo __('Next') ?></a>
+		<?php else: ?>
+			<?php echo __('Next') ?>
+		<?php endif ?>
 
-And you get:
+		<?php if ($last_page !== FALSE): ?>
+			<a href="<?php echo $page->url($last_page) ?>" rel="last"><?php echo __('Last') ?></a>
+		<?php else: ?>
+			<?php echo __('Last') ?>
+		<?php endif ?>
 
-	"This is a bar"
+	</p><!-- .pagination -->
 
-Complex Example
------
+Wow, look at all that login in there! How do you plan on effectively maintaining that?!?
 
-Model (This example uses [AutoModeler](http://github.com/zombor/Auto-Modeler)):
-
-	<?php
-
-	class Model_Test extends AutoModeler
-	{
-		protected $_table_name = 'tests';
-
-		protected $_data = array(
-			'id' => '',
-			'name' => '',
-			'value' => '',
-		);
-
-		protected $_rules = array(
-			'name' => array('not_empty'),
-			'value' => array('not_empty'),
-		);
-	}
-
-View:
-
-	<?php
-
-	class View_Example extends Kostache
-	{
-		public $title = 'Testing';
-
-		public function things()
-		{
-			return Inflector::plural(get_class(new Model_Test));
-		}
-
-		public function tests()
-		{
-			$tests = array();
-			foreach (AutoModeler::factory('test')->fetch_all() as $test)
-			{
-				$tests[] = $test->as_array();
-			}
-			return $tests;
-		}
-	}
-
-Template:
-
-	<!DOCTYPE html>
-	<html lang="en">
-		<head>
-			<meta charset="utf-8" />
-			<title>{{title}}</title>
-		</head>
-		<body>
-			<h1>{{title}}</h1>
-			<p>Here are all my {{things}}:</p>
-			<ul>
-				{{#tests}}
-				<li><strong>{{id}}:</strong> ({{name}}:{{value}})</li>
-				{{/tests}}
-			</ul>
-		</body>
-	</html>
-
-Controller:
-
-	<?php
-
-	class Controller_Welcome extends Controller {
-
-		public function action_index()
-		{
-			echo new View_Example;
-		}
-
-	} // End Welcome
-
-Grabbing a single model value
------
-
-Model (This example uses [AutoModeler](http://github.com/zombor/Auto-Modeler)):
-
-	<?php
-
-	class Model_Test extends AutoModeler
-	{
-		protected $_table_name = 'tests';
-
-		protected $_data = array(
-			'id' => '',
-			'name' => '',
-			'value' => '',
-		);
-
-		protected $_rules = array(
-			'name' => array('not_empty'),
-			'value' => array('not_empty'),
-		);
-	}
-
-View:
-
-	<?php
-
-	class View_Singular extends Kostache
-	{
-		protected $_pragmas = array(Kostache::PRAGMA_DOT_NOTATION => TRUE);
-
-		public $thing_id = NULL;
-		public $title = 'Testing';
-
-		public function thing()
-		{
-			return new Model_Test($this->thing_id);
-		}
-	}
-
-Template:
-
-	<!DOCTYPE html>
-	<html lang="en">
-		<head>
-			<meta charset="utf-8" />
-			<title>{{title}}</title>
-		</head>
-		<body>
-			<h1>{{title}}</h1>
-			<p>This is just one thing:</p>
-			<h2>{{thing.id}}</h2>
-			<ul>
-				<li>Name: {{thing.name}}</li>
-				<li>Value: {{thing.value}}</li>
-			</ul>
-		</body>
-	</html>
-
-Controller:
+### Our new View Class (classes/view/pagination/basic.php)
 
 	<?php defined('SYSPATH') or die('No direct script access.');
 
-	class Controller_Welcome extends Controller {
+	class View_Pagination_Basic extends kostache {
+	
+		protected $pagination;
 
-		public function action_singular($id)
-		{
-			$view = new View_Singular;
-			$view->thing_id = $id;
-			echo $view;
+		protected function items()
+		{	
+			$items = array();
+		
+			// First.
+			$first['title'] = 'first';
+			$first['name'] = __('first');
+			$first['url'] = ($this->pagination->first_page !== FALSE) ? $this->pagination->url($this->pagination->first_page) : FALSE;
+			$items[] = $first;
+		
+			// Prev.
+			$prev['title'] = 'prev';
+			$prev['name'] = __('previous');
+			$prev['url'] = ($this->pagination->previous_page !== FALSE) ? $this->pagination->url($this->pagination->previous_page) : FALSE;
+			$items[] = $prev;
+		
+			// Numbers.
+			for ($i=1; $i<=$this->pagination->total_pages; $i++)
+			{
+				$item = array();
+			
+				$item['num'] = TRUE;
+				$item['name'] = $i;
+				$item['url'] = ($i != $this->pagination->current_page) ? $this->pagination->url($i) : FALSE;
+			
+				$items[] = $item;
+			}
+		
+			// Next.
+			$next['title'] = 'next';
+			$next['name'] = __('next');
+			$next['url'] = ($this->pagination->next_page !== FALSE) ? $this->pagination->url($this->pagination->next_page) : FALSE;
+			$items[] = $next;
+		
+			// Last.
+			$last['title'] = 'last';
+			$last['name'] = __('last');
+			$last['url'] = ($this->pagination->last_page !== FALSE) ? $this->pagination->url($this->pagination->last_page) : FALSE;
+			$items[] = $last;
+
+			return $items;
 		}
-	} // End Welcome
+	}
 
-Partials
----
+Yum, logic in a class, where it belongs :)
+
+### Our mustache template (templates/pagination/basic.mustache)
+
+	<p class="pagination">
+	{{#items}}
+	{{#url}}<a href="{{url}}" {{#title}}rel="{{rel}}"{{/title}}>{{/url}}{{#num}}<strong>{{/num}}{{name}}{{#num}}</strong>{{/num}}{{#url}}</a>{{/url}}
+	{{/items}}
+	</p>
+
+Holy cow, that's more maintainable :)
+
+## Partials
 
 To use a partial in your template you use the greater than sign (>) and the name, e.g. {{>header}}.
 
@@ -198,8 +125,7 @@ You must define partials within the $_partials array in your view class.  The ke
 		'footer' => 'footer/default', // Loads templates/footer/default.mustache
 	);
 
-Using the View_Layout class
----
+## Using the View_Layout class
 
 KOstache comes with a View_Layout class instead of a template controller. This allows your layouts to be more OOP and self contained, and they do not rely on your controllers so much.
 
