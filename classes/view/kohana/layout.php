@@ -9,7 +9,7 @@ class View_Kohana_Layout extends Kostache
 	/**
 	 * @var string template title
 	 */
-	public $title = 'Brought to you by KOstache!';
+	public $title = 'Brought to you by Kostache!';
 
 	/**
 	 * Renders the body template into the layout

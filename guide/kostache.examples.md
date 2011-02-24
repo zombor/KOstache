@@ -1,4 +1,4 @@
-# KOstache Examples
+# Kostache Examples
 
 ## Complex Example
 

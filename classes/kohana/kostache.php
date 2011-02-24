@@ -7,7 +7,7 @@ class Kohana_Kostache extends Mustache
 	protected $_partials_processed = FALSE;
 
 	/**
-	 * KOstache class factory constructor.
+	 * Kostache class factory constructor.
 	 *
 	 * This method accepts a $template string and a $view object. Optionally, pass an associative
 	 * array of partials as well.
@@ -30,7 +30,7 @@ class Kohana_Kostache extends Mustache
 	}
 
 	/**
-	 * KOstache class constructor.
+	 * Kostache class constructor.
 	 *
 	 * This method accepts a $template string and a $view object. Optionally, pass an associative
 	 * array of partials as well.

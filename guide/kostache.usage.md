@@ -1,4 +1,4 @@
-# KOstache Usage
+# Kostache Usage
 
 View classes go in classes/view/
 
@@ -37,7 +37,7 @@ You must define partials within the $_partials array in your view class.  The ke
 
 ## Using the View_Layout class
 
-KOstache comes with a View_Layout class instead of a template controller. This allows your layouts to be more OOP and self contained, and they do not rely on your controllers so much.
+Kostache comes with a View_Layout class instead of a template controller. This allows your layouts to be more OOP and self contained, and they do not rely on your controllers so much.
 
 To use it, have your view extend the View_Layout class. You can then specify your own layout file by placing it in templates/layout.mustache. At a minimum, it needs to have a {{>body}}; partial defined in it.
 

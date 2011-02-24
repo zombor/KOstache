@@ -1,6 +1,6 @@
-# About KOstache
+# About Kostache
 
-KOstache is a Kohana module for using [Mustache](http://defunkt.github.com/mustache/) templates in your application.
+Kostache is a Kohana module for using [Mustache](http://defunkt.github.com/mustache/) templates in your application.
 
 Mustache is a logic-less template class. It is impossible to embed logic into mustache files.
 
