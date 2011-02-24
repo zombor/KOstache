@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Kohana_Kostache {
+abstract class Kohana_Kostache {
 
 	const VERSION = '2.0beta1';
 

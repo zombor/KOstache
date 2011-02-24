@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Kohana_Kostache_Layout extends Kostache {
+abstract class Kohana_Kostache_Layout extends Kostache {
 
 	/**
 	 * @var  string  partial name for content
