@@ -51,6 +51,15 @@ class Kohana_Kostache {
 		// Load the template
 		$this->template($template);
 
+		if ($this->_partials)
+		{
+			foreach ($this->_partials as $name => $path)
+			{
+				// Load the partials defined in the view
+				$this->partial($name, $path);
+			}
+		}
+
 		if ($partials)
 		{
 			foreach ($partials as $name => $path)
