@@ -8,13 +8,18 @@ abstract class Kohana_Kostache_Layout extends Kostache {
 	const CONTENT_PARTIAL = 'content';
 
 	/**
+	 * @var  boolean  render template in layout?
+	 */
+	public $render_layout = TRUE;
+
+	/**
 	 * @var  string  layout path
 	 */
 	protected $_layout = 'layout';
 
 	public function render()
 	{
-		if ( ! $this->_layout)
+		if ( ! $this->render_layout)
 		{
 			return parent::render();
 		}
