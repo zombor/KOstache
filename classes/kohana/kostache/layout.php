@@ -1,5 +1,15 @@
 <?php defined('SYSPATH') or die('No direct script access.');
-
+/**
+ * Mustache templates for Kohana.
+ *
+ * @package    Kostache
+ * @category   Base
+ * @author     Jeremy Bush <jeremy.bush@kohanaframework.org>
+ * @author     Woody Gilk <woody.gilk@kohanaframework.org>
+ * @copyright  (c) 2010-2011 Jeremy Bush
+ * @copyright  (c) 2011 Woody Gilk
+ * @license    MIT
+ */
 abstract class Kohana_Kostache_Layout extends Kostache {
 
 	/**
