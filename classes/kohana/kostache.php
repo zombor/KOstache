@@ -90,7 +90,7 @@ abstract class Kohana_Kostache {
 	{
 		try
 		{
-			$this->render();
+			return $this->render();
 		}
 		catch (Exception $e)
 		{
