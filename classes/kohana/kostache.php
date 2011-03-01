@@ -209,7 +209,9 @@ abstract class Kohana_Kostache {
 	 */
 	protected function _stash($template, Kostache $view, array $partials)
 	{
-		return new Mustache($template, $view, $partials);
+		return new Mustache($template, $view, $partials, array(
+			'charset' => Kohana::$charset,
+		));
 	}
 
 	/**
