@@ -12,7 +12,7 @@
  */
 abstract class Kohana_Kostache {
 
-	const VERSION = '2.0beta1';
+	const VERSION = '2.0.1';
 
 	/**
 	 * Factory method for Kostache views. Accepts a template path and an
@@ -56,8 +56,14 @@ abstract class Kohana_Kostache {
 	 * @uses    Kostache::template
 	 * @uses    Kostache::partial
 	 */
-	public function __construct($template, array $partials = NULL)
+	public function __construct($template = NULL, array $partials = NULL)
 	{
+		if ( ! $template)
+		{
+			// Detect the template for this class
+			$template = $this->_detect_template();
+		}
+
 		// Load the template
 		$this->template($template);
 
@@ -97,7 +103,7 @@ abstract class Kohana_Kostache {
 			ob_start();
 
 			// Render the exception
-			Kohana::exception_text($e);
+			Kohana_Exception::text($e);
 
 			return (string) ob_get_clean();
 		}
@@ -233,6 +239,25 @@ abstract class Kohana_Kostache {
 		}
 
 		return file_get_contents($file);
+	}
+
+	/**
+	 * Detect the template name from the class name.
+	 *
+	 * @return  string
+	 */
+	protected function _detect_template()
+	{
+		// Start creating the template path from the class name
+		$template = explode('_', get_class($this));
+
+		// Remove "View" prefix
+		array_shift($template);
+
+		// Convert name parts into a path
+		$template = strtolower(implode('/', $template));
+
+		return $template;
 	}
 
 }
