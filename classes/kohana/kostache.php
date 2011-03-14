@@ -15,6 +15,16 @@ abstract class Kohana_Kostache {
 	const VERSION = '2.0.1';
 
 	/**
+	 * @var  string  directory where templates are stored
+	 */
+	public static $directory = 'templates';
+
+	/**
+	 * @var  string  template extension
+	 */
+	public static $extension = 'mustache';
+
+	/**
 	 * Factory method for Kostache views. Accepts a template path and an
 	 * optional array of partial paths.
 	 *
@@ -229,7 +239,7 @@ abstract class Kohana_Kostache {
 	 */
 	protected function _load($path)
 	{
-		$file = Kohana::find_file('templates', $path, 'mustache');
+		$file = Kohana::find_file(Kostache::$directory, $path, Kostache::$extension);
 
 		if ( ! $file)
 		{
