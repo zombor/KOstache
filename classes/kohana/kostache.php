@@ -123,7 +123,7 @@ abstract class Kohana_Kostache {
 
 	/**
 	 * Loads a new partial from a path. If the path is empty, the partial will
-	 * be removed.
+	 * be removed. If the path does not exist, partial will be added literally
 	 *
 	 * @param   string  partial name
 	 * @param   mixed   partial path, FALSE to remove the partial
@@ -137,7 +137,16 @@ abstract class Kohana_Kostache {
 		}
 		else
 		{
-			$this->_partials[$name] = $this->_load($path);
+			try
+			{
+				// Load partial template from file
+				$this->_partials[$name] = $this->_load($path);
+			}
+			catch (Kohana_Exception $e)
+			{
+				// Add partial literally, if above failed
+				$this->_partials[$name] = $path;
+			}
 		}
 
 		return $this;
