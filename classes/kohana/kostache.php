@@ -12,7 +12,7 @@
  */
 abstract class Kohana_Kostache {
 
-	const VERSION = '2.0.1';
+	const VERSION = '2.0.2';
 
 	/**
 	 * Factory method for Kostache views. Accepts a template path and an
@@ -60,8 +60,16 @@ abstract class Kohana_Kostache {
 	{
 		if ( ! $template)
 		{
-			// Detect the template for this class
-			$template = $this->_detect_template();
+			if ($this->_template)
+			{
+				// Load the template defined in the view
+				$template = $this->_template;
+			}
+			else
+			{
+				// Detect the template for this class
+				$template = $this->_detect_template();
+			}
 		}
 
 		// Load the template
@@ -103,7 +111,7 @@ abstract class Kohana_Kostache {
 			ob_start();
 
 			// Render the exception
-			Kohana_Exception::text($e);
+			Kohana_Exception::handler($e);
 
 			return (string) ob_get_clean();
 		}
