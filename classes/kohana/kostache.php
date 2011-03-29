@@ -111,7 +111,7 @@ abstract class Kohana_Kostache {
 			ob_start();
 
 			// Render the exception
-			Kohana::exception_handler($e);
+			Kohana_Exception::handler($e);
 
 			return (string) ob_get_clean();
 		}
