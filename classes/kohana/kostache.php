@@ -103,7 +103,7 @@ abstract class Kohana_Kostache {
 			ob_start();
 
 			// Render the exception
-			Kohana_Exception::text($e);
+			echo Kohana_Exception::text($e);
 
 			return (string) ob_get_clean();
 		}
