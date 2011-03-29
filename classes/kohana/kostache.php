@@ -60,8 +60,16 @@ abstract class Kohana_Kostache {
 	{
 		if ( ! $template)
 		{
-			// Detect the template for this class
-			$template = $this->_detect_template();
+			if ($this->_template)
+			{
+				// Load the template defined in the view
+				$template = $this->_template;
+			}
+			else
+			{
+				// Detect the template for this class
+				$template = $this->_detect_template();
+			}
 		}
 
 		// Load the template
