@@ -12,7 +12,7 @@
  */
 abstract class Kohana_Kostache {
 
-	const VERSION = '2.0.3';
+	const VERSION = '2.0.4';
 
 	/**
 	 * Factory method for Kostache views. Accepts a template path and an
@@ -23,9 +23,9 @@ abstract class Kohana_Kostache {
 	 * @return  Kostache
 	 * @throws  Kohana_Exception  if the view class does not exist
 	 */
-	public static function factory($template, array $partials = NULL)
+	public static function factory($path, array $partials = NULL)
 	{
-		$class = 'View_'.str_replace('/', '_', $template);
+		$class = 'View_'.str_replace('/', '_', $path);
 
 		if ( ! class_exists($class))
 		{
@@ -34,7 +34,7 @@ abstract class Kohana_Kostache {
 			));
 		}
 
-		return new $class($template, $partials);
+		return new $class(NULL, $partials);
 	}
 
 	/**
