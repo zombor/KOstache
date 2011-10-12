@@ -39,7 +39,7 @@ You must define partials within the $_partials array in your view class.  The ke
 
 Kostache comes with a View_Layout class instead of a template controller. This allows your layouts to be more OOP and self contained, and they do not rely on your controllers so much.
 
-To use it, have your view extend the View_Layout class. You can then specify your own layout file by placing it in templates/layout.mustache. At a minimum, it needs to have a {{>body}}; partial defined in it.
+To use it, have your view extend the View_Layout class. You can then specify your own layout file by placing it in templates/layout.mustache. At a minimum, it needs to have a {{>content}} partial defined in it.
 
 If you have a view that extends the View_Layout class, but wish to render only the template and not the entire layout, you can set the public $render_layout property to FALSE.  This is useful if you want to use the same view class for external requests and HMVC requests.
 
