@@ -127,7 +127,7 @@ You must define partials within the $_partials array in your view class.  The ke
 		'footer' => 'footer/default', // Loads templates/footer/default.mustache
 	);
 
-## Using the View_Layout class
+## Using the Kostache_Layout class
 
 Kostache comes with a Kostache_Layout class instead of a template controller. This allows your layouts to be more OOP and self contained, and they do not rely on your controllers so much.
 
