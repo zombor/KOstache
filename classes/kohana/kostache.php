@@ -6,13 +6,13 @@
  * @category   Base
  * @author     Jeremy Bush <jeremy.bush@kohanaframework.org>
  * @author     Woody Gilk <woody.gilk@kohanaframework.org>
- * @copyright  (c) 2010-2011 Jeremy Bush
- * @copyright  (c) 2011 Woody Gilk
+ * @copyright  (c) 2010-2012 Jeremy Bush
+ * @copyright  (c) 2011-2012 Woody Gilk
  * @license    MIT
  */
 abstract class Kohana_Kostache {
 
-	const VERSION = '2.0.5';
+	const VERSION = '2.0.6';
 
 	/**
 	 * Factory method for Kostache views. Accepts a template path and an

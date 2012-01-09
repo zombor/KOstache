@@ -1,7 +1,7 @@
 The MIT License
 
-Copyright (c) 2010-2011 Jeremy Bush
-Copyright (c) 2011 Woody Gilk
+Copyright (c) 2010-2012 Jeremy Bush
+Copyright (c) 2011-2012 Woody Gilk
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
