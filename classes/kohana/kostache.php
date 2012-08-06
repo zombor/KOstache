@@ -268,4 +268,17 @@ abstract class Kohana_Kostache {
 		return $template;
 	}
 
+	/**
+	 * I18n callback that translates the text.
+	 * 
+	 * Example of how to translate text in your template by using Kohana's I18n:
+	 * <div>{{#i18n}}Email{{/i18n}}</div>
+	 * 
+	 * @return  array
+	 */
+	public function i18n()
+	{
+		return array('I18n', 'get');
+	}
+
 }
