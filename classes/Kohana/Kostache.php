@@ -12,7 +12,7 @@
  */
 abstract class Kohana_Kostache {
 
-	const VERSION = '2.0.6';
+	const VERSION = '3.0.0';
 
 	/**
 	 * Factory method for Kostache views. Accepts a template path and an
