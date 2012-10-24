@@ -16,7 +16,7 @@ class Kohana_Kostache {
 
 	protected $_engine;
 
-	public static function factory()
+	public static function factory($cache = FALSE)
 	{
 		$m = new Mustache_Engine(
 			array(
@@ -25,6 +25,7 @@ class Kohana_Kostache {
 				'escape' => function($value) {
 					return html::chars($value);
 				},
+				'cache' => $cache ? APPPATH.'cache/mustache' : NULL,
 			)
 		);
 
