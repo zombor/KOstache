@@ -14,7 +14,7 @@ abstract class Kohana_Kostache {
 
 	const VERSION = '4.0.0';
 
-	public static function engine()
+	public static function engine($template_name)
 	{
 		$m = new Mustache_Engine(
 			array(
@@ -25,5 +25,7 @@ abstract class Kohana_Kostache {
 				},
 			)
 		);
+
+		return $m->loadTemplate($template_name);
 	}
 }
