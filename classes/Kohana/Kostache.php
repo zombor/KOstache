@@ -10,11 +10,13 @@
  * @copyright  (c) 2011-2012 Woody Gilk
  * @license    MIT
  */
-abstract class Kohana_Kostache {
+class Kohana_Kostache {
 
 	const VERSION = '4.0.0';
 
-	public static function engine($template_name)
+	protected $_engine;
+
+	public static function factory()
 	{
 		$m = new Mustache_Engine(
 			array(
@@ -26,6 +28,23 @@ abstract class Kohana_Kostache {
 			)
 		);
 
-		return $m->loadTemplate($template_name);
+		return new self($m);
+	}
+
+	public function __construct($engine)
+	{
+		$this->_engine = $engine;
+	}
+
+	public function render($class, $template = NULL)
+	{
+		if ($template == NULL)
+		{
+			$template = explode('_', get_class($class));
+			array_shift($template);
+			$template = implode('/', $template);
+		}
+
+		return $this->_engine->loadTemplate($template)->render($class);
 	}
 }
