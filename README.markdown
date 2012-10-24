@@ -25,7 +25,7 @@ And create a mustache renderer. The parameter to the engine method is the templa
 ```php
 <?php
 
-$renderer = Kohana_Kostache::engine('test');
+$renderer = Kostache::factory();
 ```
 
 And render it:
