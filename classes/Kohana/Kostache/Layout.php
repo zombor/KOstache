@@ -20,11 +20,16 @@ class Kohana_Kostache_Layout extends Kohana_Kostache {
 	 */
 	protected $_layout = 'layout';
 
-	public function __construct($engine, $layout = 'layout')
+	public static function factory($layout = 'layout')
 	{
-		$this->_layout = $layout;
+		$k = parent::factory();
+		$k->set_layout($layout);
+		return $k;
+	}
 
-		parent::__construct($engine);
+	public function set_layout($layout)
+	{
+		$this->_layout = (string) $layout;
 	}
 
 	public function render($class, $template = NULL)
