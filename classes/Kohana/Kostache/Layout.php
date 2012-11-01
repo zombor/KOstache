@@ -5,12 +5,10 @@
  * @package    Kostache
  * @category   Base
  * @author     Jeremy Bush <jeremy.bush@kohanaframework.org>
- * @author     Woody Gilk <woody.gilk@kohanaframework.org>
  * @copyright  (c) 2010-2012 Jeremy Bush
- * @copyright  (c) 2011-2012 Woody Gilk
  * @license    MIT
  */
-abstract class Kohana_Kostache_Layout extends Kostache {
+class Kohana_Kostache_Layout extends Kohana_Kostache {
 
 	/**
 	 * @var  string  partial name for content
@@ -27,20 +25,20 @@ abstract class Kohana_Kostache_Layout extends Kostache {
 	 */
 	protected $_layout = 'layout';
 
-	public function render()
+	public function render($class, $template = NULL)
 	{
 		if ( ! $this->render_layout)
 		{
 			return parent::render();
 		}
 
-		$partials = $this->_partials;
+		$this->_engine->setPartials(
+			array(
+				Kostache_Layout::CONTENT_PARTIAL => parent::render($class, $template)
+			)
+		);
 
-		$partials[Kostache_Layout::CONTENT_PARTIAL] = $this->_template;
-
-		$template = $this->_load($this->_layout);
-
-		return $this->_stash($template, $this, $partials)->render();
+		return $this->_engine->loadTemplate($this->_layout)->render($class);
 	}
 
 }

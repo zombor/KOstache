@@ -1,6 +1,6 @@
 <?php
 
-class Mustache_Loader_Kohana implements Mustache_Loader
+class Mustache_Loader_Kohana implements Mustache_Loader, Mustache_Loader_MutableLoader
 {
 	private $_base_dir = 'templates';
 	private $_extension = 'mustache';
@@ -31,5 +31,26 @@ class Mustache_Loader_Kohana implements Mustache_Loader
 	{
 		$filename = Kohana::find_file($this->_base_dir, $name, $this->_extension);
 		return file_get_contents($filename);
+	}
+
+	/**
+	 * Set an associative array of Template sources for this loader.
+	 *
+	 * @param array $templates
+	 */
+	public function setTemplates(array $templates)
+	{
+		$this->_templates = array_merge($this->_templates, $templates);
+	}
+
+	/**
+	 * Set a Template source by name.
+	 *
+	 * @param string $name
+	 * @param string $template Mustache Template source
+	 */
+	public function setTemplate($name, $template)
+	{
+		$this->_templates[$name] = $template;
 	}
 }

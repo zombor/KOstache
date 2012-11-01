@@ -5,9 +5,7 @@
  * @package    Kostache
  * @category   Base
  * @author     Jeremy Bush <jeremy.bush@kohanaframework.org>
- * @author     Woody Gilk <woody.gilk@kohanaframework.org>
  * @copyright  (c) 2010-2012 Jeremy Bush
- * @copyright  (c) 2011-2012 Woody Gilk
  * @license    MIT
  */
 class Kohana_Kostache {
@@ -29,7 +27,8 @@ class Kohana_Kostache {
 			)
 		);
 
-		return new self($m);
+		$class = get_called_class();
+		return new $class($m);
 	}
 
 	public function __construct($engine)
