@@ -29,7 +29,7 @@ class Kohana_Kostache_Layout extends Kohana_Kostache {
 	{
 		if ( ! $this->render_layout)
 		{
-			return parent::render();
+			return parent::render($class, $template);
 		}
 
 		$this->_engine->setPartials(
