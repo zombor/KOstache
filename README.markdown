@@ -44,6 +44,12 @@ Templates should go in the `templates/` directory in your cascading file system.
 
 Partials are loaded automatically based on the name used in the template. So if you reference `{{>foobar}}` in your template, it will look for that partial in `templates/partials/foobar.mustache`.
 
+# Layouts
+
+KOstache supports layouts. To use, just add a `templates/layout.mustache` file (a simple one is already provided), and use `Kostache_Layout` for your renderer instead of `Kostache`. You'll probably want to put a `$title` property in your view class. The layout should include a `{{>content}}` partial to render the body of the page.
+
+# Additional Information
+
 For specific usage and documentation, see:
 
 [PHP Mustache](http://github.com/bobthecow/mustache.php)
