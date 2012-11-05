@@ -21,7 +21,7 @@ class Kohana_Kostache {
 				'loader' => new Mustache_Loader_Kohana(),
 				'partials_loader' => new Mustache_Loader_Kohana('templates/partials'),
 				'escape' => function($value) {
-					return html::chars($value);
+					return HTML::chars($value);
 				},
 				'cache' => APPPATH.'cache/mustache',
 			)
