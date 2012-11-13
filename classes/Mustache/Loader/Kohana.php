@@ -13,7 +13,7 @@ class Mustache_Loader_Kohana implements Mustache_Loader, Mustache_Loader_Mutable
 
 		if (isset($options['extension']))
 		{
-			$this->_extension = '.' . ltrim($options['extension'], '.');
+			$this->_extension = ltrim($options['extension'], '.');
 		}
 	}
 
