@@ -1,6 +1,6 @@
 # Kostache
 
-Kostache is a [Kohana 3](https://github.com/kohana/kohana) module for using [Mustache](http://defunkt.github.com/mustache/) templates in your application.
+Kostache is a [Kohana 3](https://github.com/kohana/kohana) module for using [Mustache](http://mustache.github.com/) templates in your application.
 
 ## Usage
 
@@ -54,4 +54,4 @@ For specific usage and documentation, see:
 
 [PHP Mustache](http://github.com/bobthecow/mustache.php)
 
-[Original Mustache](http://defunkt.github.com/mustache/)
+[Original Mustache](http://mustache.github.com/)
