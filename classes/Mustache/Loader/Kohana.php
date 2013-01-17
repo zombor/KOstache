@@ -13,7 +13,7 @@ class Mustache_Loader_Kohana implements Mustache_Loader, Mustache_Loader_Mutable
 
 		if (isset($options['extension']))
 		{
-			$this->_extension = '.' . ltrim($options['extension'], '.');
+			$this->_extension = ltrim($options['extension'], '.');
 		}
 	}
 
@@ -29,7 +29,13 @@ class Mustache_Loader_Kohana implements Mustache_Loader, Mustache_Loader_Mutable
 
 	protected function _load_file($name)
 	{
-		$filename = Kohana::find_file($this->_base_dir, $name, $this->_extension);
+		$filename = Kohana::find_file($this->_base_dir, strtolower($name), $this->_extension);
+
+		if ( ! $filename)
+		{
+			throw new Kohana_Exception('Mustache template ":name" not found', array(':name' => $name));
+		}
+
 		return file_get_contents($filename);
 	}
 
