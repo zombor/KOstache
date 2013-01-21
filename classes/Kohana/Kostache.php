@@ -20,9 +20,7 @@ class Kohana_Kostache {
 			array(
 				'loader' => new Mustache_Loader_Kohana(),
 				'partials_loader' => new Mustache_Loader_Kohana('templates/partials'),
-				'escape' => function($value) {
-					return HTML::chars($value);
-				},
+				'escape' => array('HTML', 'chars'),
 				'cache' => APPPATH.'cache/mustache',
 			)
 		);
