@@ -34,11 +34,13 @@ class Kohana_Kostache_Layout extends Kohana_Kostache {
 
 	public function render($class, $template = NULL)
 	{
-		$this->_engine->setPartials(
-			array(
-				Kostache_Layout::CONTENT_PARTIAL => parent::render($class, $template)
-			)
-		);
+		$content = $this->_engine
+			->getLoader()
+			->load($this->_detect_template_path($class));
+
+		$this->_engine->setPartials(array(
+			Kostache_Layout::CONTENT_PARTIAL => $content
+		));
 
 		return $this->_engine->loadTemplate($this->_layout)->render($class);
 	}
