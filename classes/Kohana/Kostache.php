@@ -40,11 +40,18 @@ class Kohana_Kostache {
 	{
 		if ($template == NULL)
 		{
-			$template = explode('_', get_class($class));
-			array_shift($template);
-			$template = implode('/', $template);
+			$template = $this->_detect_template_path($class);
 		}
 
 		return $this->_engine->loadTemplate($template)->render($class);
 	}
+
+	protected function _detect_template_path($class)
+	{
+		$path = explode('_', get_class($class));
+		array_shift($path);
+
+		return implode('/', $path);
+	}
+
 }
