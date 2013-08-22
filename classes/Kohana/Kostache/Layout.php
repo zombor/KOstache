@@ -8,7 +8,7 @@
  * @copyright  (c) 2010-2012 Jeremy Bush
  * @license    MIT
  */
-class Kohana_Kostache_Layout extends Kohana_Kostache {
+class Kohana_Kostache_Layout extends Kostache {
 
 	/**
 	 * @var  string  partial name for content
@@ -34,9 +34,14 @@ class Kohana_Kostache_Layout extends Kohana_Kostache {
 
 	public function render($class, $template = NULL)
 	{
+		if ($template === NULL)
+		{
+			$template = $this->_detect_template_path($class);
+		}
+
 		$content = $this->_engine
 			->getLoader()
-			->load($this->_detect_template_path($class));
+			->load($template);
 
 		$this->_engine->setPartials(array(
 			Kostache_Layout::CONTENT_PARTIAL => $content
