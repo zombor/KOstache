@@ -23,7 +23,7 @@ class Kohana_Kostache {
 				'escape' => function($value) {
 					return HTML::chars($value);
 				},
-				'cache' => APPPATH.'cache/mustache',
+				'cache' => Kohana::$cache_dir.DIRECTORY_SEPARATOR.'mustache',
 			)
 		);
 
