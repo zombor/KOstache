@@ -1,0 +1,19 @@
+{
+	"name": "zombor/kostache",
+	"type": "kohana-module",
+	"description": "Logic-less View/Mustache Module for Kohana v3",
+	"keywords": ["kohana","mustache","templating"],
+	"homepage": "https://github.com/zombor/KOstache",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Jeremy Bush",
+			"email": "contractfrombelow@gmail.com"
+		}
+	],
+	"require": {
+		"mustache/mustache": "~2.0.2",
+		"php": ">=5.3.0",
+		"composer/installers": "*"
+	}
+}
