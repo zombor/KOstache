@@ -1,0 +1,25 @@
+{
+	"name": "zombor/kostache",
+	"description": "Logic-less View/Mustache Module for the Kohana Framework",
+	"keywords": ["kohana", "mustache", "templating", "view"],
+	"homepage": "https://github.com/zombor/KOstache",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Jeremy Bush",
+			"email": "jeremy.bush@kohanaframework.org"
+		},
+		{
+			"name": "Woody Gilk",
+			"email": "woody.gilk@kohanaframework.org"
+		}
+	],
+	"support": {
+		"issues":   "https://github.com/zombor/KOstache/issues",
+		"source":   "https://github.com/zombor/KOstache"
+	},
+	"require": {
+		"mustache/mustache": "~2.6.0",
+		"php": ">=5.3.0"
+	}
+}
