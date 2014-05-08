@@ -5,12 +5,14 @@
  * @package    Kostache
  * @category   Base
  * @author     Jeremy Bush <jeremy.bush@kohanaframework.org>
+ * @author     Woody Gilk <woody.gilk@kohanaframework.org>
  * @copyright  (c) 2010-2012 Jeremy Bush
+ * @copyright  (c) 2012-2014 Woody Gilk
  * @license    MIT
  */
 class Kohana_Kostache {
 
-	const VERSION = '4.0.0';
+	const VERSION = '4.0.3';
 
 	protected $_engine;
 
