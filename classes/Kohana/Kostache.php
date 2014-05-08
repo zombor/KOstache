@@ -5,12 +5,14 @@
  * @package    Kostache
  * @category   Base
  * @author     Jeremy Bush <jeremy.bush@kohanaframework.org>
+ * @author     Woody Gilk <woody.gilk@kohanaframework.org>
  * @copyright  (c) 2010-2012 Jeremy Bush
+ * @copyright  (c) 2012-2014 Woody Gilk
  * @license    MIT
  */
 class Kohana_Kostache {
 
-	const VERSION = '4.0.0';
+	const VERSION = '4.0.3';
 
 	protected $_engine;
 
@@ -23,7 +25,7 @@ class Kohana_Kostache {
 				'escape' => function($value) {
 					return HTML::chars($value);
 				},
-				'cache' => APPPATH.'cache/mustache',
+				'cache' => Kohana::$cache_dir.DIRECTORY_SEPARATOR.'mustache',
 			)
 		);
 
@@ -40,11 +42,18 @@ class Kohana_Kostache {
 	{
 		if ($template == NULL)
 		{
-			$template = explode('_', get_class($class));
-			array_shift($template);
-			$template = implode('/', $template);
+			$template = $this->_detect_template_path($class);
 		}
 
 		return $this->_engine->loadTemplate($template)->render($class);
 	}
+
+	protected function _detect_template_path($class)
+	{
+		$path = explode('_', get_class($class));
+		array_shift($path);
+
+		return implode('/', $path);
+	}
+
 }

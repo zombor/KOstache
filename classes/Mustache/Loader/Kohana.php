@@ -29,7 +29,7 @@ class Mustache_Loader_Kohana implements Mustache_Loader, Mustache_Loader_Mutable
 
 	protected function _load_file($name)
 	{
-		$filename = Kohana::find_file($this->_base_dir, strtolower($name), $this->_extension);
+		$filename = Kohana::find_file($this->_base_dir, $name = strtolower($name), $this->_extension);
 
 		if ( ! $filename)
 		{
