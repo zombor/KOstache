@@ -55,3 +55,51 @@ For specific usage and documentation, see:
 [PHP Mustache](http://github.com/bobthecow/mustache.php)
 
 [Original Mustache](http://mustache.github.com/)
+
+## Additional Example (KOstache for Dummies)
+
+To use, simply create a POPO (Plain Old PHP Object) like so:  Under Controller/View create Test.php.
+
+```php
+<?php
+
+class View_Test
+{
+	public $title;
+
+	public function testing()
+	{
+		return 'foobar';
+	}
+}
+```
+
+And modify the Controller/Welcome.php that comes default with Kohana.
+
+```php
+<?php
+	public function action_index()	{
+		$view = new View_Test;
+		$view->title = "hello World";   or  //Kohana::$config->load("site.title");
+		$this->response->body(Kostache::factory()->render($view));
+	}
+```
+
+And create test.mustache in classes/templates subdir:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>{{title}}</title>
+</head>
+<body>
+    <h1>{{title}}</h1>
+    <p>{{testing}}</p>
+    
+</body>
+</html>
+```
+
+
