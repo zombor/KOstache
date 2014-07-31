@@ -8,7 +8,7 @@
  * @copyright  (c) 2010-2012 Jeremy Bush
  * @license    MIT
  */
-class Kohana_Kostache_Layout extends Kohana_Kostache {
+class Kohana_Kostache_Layout extends Kostache {
 
 	/**
 	 * @var  string  partial name for content
